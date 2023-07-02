@@ -4,4 +4,5 @@ Write-Host 'Hello World'
 
 start-vm -name 'Test Lab'
 Stop-VM 'test lab'
-Get-VM
+
+get-vm | Set-VMBios -EnableNumLock
