@@ -14,4 +14,6 @@ $h2 = @{
 
 $Cars.add($h1)
 
+$Cars.add($h2)
+
 $Cars

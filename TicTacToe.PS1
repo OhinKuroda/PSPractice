@@ -4,11 +4,14 @@
 #   4 | 5 | 6
 #   --+---+---
 #   7 | 8 | 9
-
+[CmdletBinding()]
+Param ()
 
 
 function DisplayBoard {
 param($Board)
+
+#ClearScreen
 Write-Host " $($Board[0]) | $($Board[1]) | $($Board[2])"
 Write-Host "---+---+---"
 Write-Host " $($Board[3]) | $($Board[4]) | $($Board[5])"
@@ -33,6 +36,7 @@ do {
         do{
                 
                 $Choice = Read-Host -Prompt "Player $CurrentPlayer, please choice your spot"
+                Write-Verbose "the current player is $currentPlayer"
               # Check for wrong responses: Not 1-9, or already chosen
               # if wrong, ask again
                 $GoodSpots = @(1,2,3,4,5,6,7,8,9)
@@ -42,8 +46,9 @@ do {
 
          #populate board to reflect choice
         $TicTacToeBoard[$Choice - 1] = $CurrentPlayer
+        Write-Verbose "the board after the change $TicTacToeBoard"
+        
         #check game state (win,lose,draw)
-
         $WinningLines = @(
             @(0,1,2),
             @(3,4,5),
@@ -56,6 +61,7 @@ do {
         )
         foreach ($WinningLine in $WinningLines) {
             $PositionValues = ($TicTacToeBoard[$WinningLine] | Select-Object -Unique)
+            Write-verbose "$Positionvalues is the values from winning line"
             if ($PositionValues.count -eq 1) {
                 $GameOver = $True
                 break
