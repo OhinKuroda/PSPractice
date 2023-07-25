@@ -18,6 +18,24 @@ function Get-Multiplication {
     return $num1 * $num2
 }
 
+function Get-Division {
+    param (
+        $Num1,
+        $Num2
+    )
+    
+    $DivHash = [Ordered]@{
+        Num1 = $Num1
+        Num2 = $Num2
+        Result = $Num1 / $Num2
+
+    }
+    $ResultObj = New-Object -TypeName psobject -Property $DivHash
+    return $ResultObj
+    
+}
+
 #to make different versions go to the module folder and create a folder and name it the version Number (1.0.0) and place your module inside
 #PS C:\PSPractice> cd 'C:\Program Files\WindowsPowerShell\Modules\MathTools\1.0.0\'        
-#New-ModuleManifest -path .\MathTools.psd1-RootModule .\MathTools.psm1 -Author 'Ohin C' -Description 'Give some math tools' -FunctionsToExport Get-Addition, Get-Multiplication -ModuleVersion '1.0.0'
+#New-ModuleManifest -path .\MathTools.psd1 -RootModule .\MathTools.psm1 -Author 'Ohin C' -Description 'Give some math tools' -FunctionsToExport Get-Addition, Get-Multiplication -ModuleVersion '1.0.0'
+#for a new version increase -moduleversion to desired number and add the necessary funtions to -functiontoexport
