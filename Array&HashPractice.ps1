@@ -12,6 +12,6 @@ $h2 = @{
 
 [System.Collections.ArrayList]$Cars = @()
 
-$Cars.add($h2)
+$Cars.add($h1)
 
 $Cars
