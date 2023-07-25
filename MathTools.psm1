@@ -145,3 +145,4 @@ function Get-Division {
 #PS C:\PSPractice> cd 'C:\Program Files\WindowsPowerShell\Modules\MathTools\1.0.0\'        
 #New-ModuleManifest -path .\MathTools.psd1 -RootModule .\MathTools.psm1 -Author 'Ohin C' -Description 'Give some math tools' -FunctionsToExport Get-Addition, Get-Multiplication -ModuleVersion '1.0.0'
 #for a new version increase -moduleversion to desired number and add the necessary funtions to -functiontoexport
+#comment-help lets you do edits to your modules help info
