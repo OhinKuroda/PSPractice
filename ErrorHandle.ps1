@@ -6,3 +6,5 @@
 Try{Get-ChildItem e:\dog.txt -ErrorAction Stop}
 #run code in brackets and if a terminating error is being sent do what is in the catch block
 catch{"no file exists"}
+finally{}
+#finally will still run whether there is an error or not
