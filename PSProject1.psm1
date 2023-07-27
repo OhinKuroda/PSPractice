@@ -11,7 +11,7 @@ function Get-NewHires{
         $LastName = $NewHire.lastName
         $Name = "$FirstName $LastName"
         $SamAccountName = $FirstName[0] + $LastName
-        $Password = (ConvertTo-SecureString -AsPlainText $NewHire.password -Force)
+        $Password = ConvertTo-SecureString -AsPlainText $NewHire.password -Force
         $department = $NewHire.Department
         $SecurityGroup = $NewHire.officename
         $OuPath = "OU=$Department,$BaseOU"
@@ -26,8 +26,8 @@ function Get-NewHires{
             Write-Host "ScurityGroup '$SecurityGroup' created."
         }
 
-        New-ADUser -Name $Name -SamAccountName $SamAccountName  -Path $OuPath
-        Add-ADGroupMember -Identity $SecurityGroup -Members $name
+        New-ADUser -Name $Name -SamAccountName $SamAccountName -AccountPassword $Password -Path $OuPath
+        Add-ADGroupMember -Identity $SecurityGroup -Members $SamAccountName
 
 
 
