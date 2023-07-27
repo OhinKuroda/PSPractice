@@ -8,12 +8,12 @@ function Get-NewHires{
 
     foreach ($NewHire in $NewHires){
         $FirstName = $NewHire.firstname
-        $LastName = $NewHire.$LastName
-        $Name = $FirstName +" "+ $LastName
+        $LastName = $NewHire.lastName
+        $Name = "$FirstName $LastName"
         $SamAccountName = $FirstName[0] + $LastName
         $Password = (ConvertTo-SecureString -AsPlainText $NewHire.password -Force)
         $department = $NewHire.Department
-        $SecurityGroup = $NewHire.
+        $SecurityGroup = $NewHire.officename
         $OuPath = "OU=$Department,$BaseOU"
 
         if (-not (Get-ADOrganizationalUnit -Filter {Name -eq $department})) {
@@ -21,13 +21,13 @@ function Get-NewHires{
         Write-Host "OU '$department' created."
         }
 
-        if (-not (Get-ADGroup -Filter {Name -eq $department})) {
+        if (-not (Get-ADGroup -Filter {Name -eq $SecurityGroup})) {
             New-ADGroup -Name $SecurityGroup -GroupScope Global
             Write-Host "ScurityGroup '$SecurityGroup' created."
         }
 
-        New-ADUser -Name $Name -Path $OuPath
-        Add-member -Identity $SecurityGroup -Members $name
+        New-ADUser -Name $Name -SamAccountName $SamAccountName  -Path $OuPath
+        Add-ADGroupMember -Identity $SecurityGroup -Members $name
 
 
 
