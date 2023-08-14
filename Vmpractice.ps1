@@ -21,3 +21,10 @@ foreach ($name in $vmNames) {
     
     Write-Host "VM '$name' created successfully!"
 }
+
+#command that installs remoteaccess on OS of Vm and routing setup
+Install-WindowsFeature RemoteAccess -IncludeManagementTools
+Install-WindowsFeature -Name Routing -IncludeManagementTools -IncludeAllSubFeature
+Install-WindowsFeature -Name "RSAT-RemoteAccess-Powershell"
+Install-RemoteAccess -VpnType RoutingOnly
+Get-NetAdapter | Set-NetIPInterface -Forwarding Enabled
