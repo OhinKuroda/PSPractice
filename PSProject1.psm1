@@ -29,11 +29,6 @@ function Get-NewHires{
         New-ADUser -Name $Name -SamAccountName $SamAccountName -AccountPassword $Password -Path $OuPath
         Add-ADGroupMember -Identity $SecurityGroup -Members $SamAccountName
 
-
-
-
-
-
     }
 
 }

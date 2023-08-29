@@ -1,8 +1,4 @@
 #prerequisite before starting project
-#Deletes 10 random users
-#Invoke-Command -ComputerName LON-DC1 -ScriptBlock {  
-#    Get-ADUser -Filter * -Properties Department | Where-Object {$_.Department -in @('Sales','Mareting','Managers')} | Get-Random -Count 10 | Remove-ADUser -Confirm:$false
-#    }  
 
 #Install Recycle bin feature in AD
 #Invoke-Command -ComputerName LON-DC1 -ScriptBlock {
@@ -11,14 +7,19 @@
 #            Enable-ADOptionalFeature 'Recycle Bin Feature' -Scope ForestOrConfigurationSet -Target adatum.com -confirm:$false
 #               }
 #      }  
-      
+
+#Deletes 10 random users
+#Invoke-Command -ComputerName LON-DC1 -ScriptBlock {  
+#    Get-ADUser -Filter * -Properties Department | Where-Object {$_.Department -in @('Sales','Mareting','Managers')} | Get-Random -Count 10 | Remove-ADUser -Confirm:$false
+#    }  
+  
 # # This command finds deleted objects
 # Get-ADObject -LDAPFilter:"(msDS-LastKnownRDN=*)" -IncludeDeletedObjects | Where-Object {$_.Deleted -eq $true}
 
 # # This command restores a deleted object 
 # Restore-ADObject 
 
-# # This command can help produce a menu of choices
+# This command can help produce a menu of choices
 # Out-Gridview
 
 
@@ -47,6 +48,7 @@ if ($selectedUser) {
   if ($confirmRestore -eq "Y") {
   # This command restores a deleted object
     Restore-ADObject -Identity $selectedUser.ObjectGUID
+    get-aduser -Identity $selectedUser.ObjectGUID -Properties deleted
     
   } else {
          Write-Host "Restoration of $($selectedUser.Name) canceled."
