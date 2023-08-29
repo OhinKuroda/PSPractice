@@ -44,7 +44,7 @@ foreach ($user in $deletedUsers) {
 $selectedUser = $menuItems | Out-GridView -Title "Select a deleted user to restore" -OutputMode Single
 
 if ($selectedUser) {
-  $confirmRestore = Read-Host "Are you sure you want to restore $($selectedUser.SamAccountName)? (Y/N)"
+  $confirmRestore = Read-Host "Are you sure you want to restore $($selectedUser.Name)? (Y/N)"
   if ($confirmRestore -eq "Y") {
   # This command restores a deleted object
     Restore-ADObject -Identity $selectedUser.ObjectGUID
